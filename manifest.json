@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Naver Search Rank",
+  "description": "네이버 검색 결과에 순위 번호를 표시합니다",
+  "version": "1.0.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.naver.com/search.naver*",
+        "https://m.search.naver.com/search.naver*"
+      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
