@@ -11,38 +11,11 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
-  z-index: 9999;
+  z-index: 10;
   pointer-events: none;
 }
 
-/* 1~3위: 강조 색상 */
+/* 색상은 JS에서 인라인 스타일로 주입 */
 .naver-rank-badge[data-rank="1"] {
-  background-color: #03c75a;
-  color: #fff;
-}
-.naver-rank-badge[data-rank="2"] {
-  background-color: #ff6b35;
-  color: #fff;
-}
-.naver-rank-badge[data-rank="3"] {
-  background-color: #4361ee;
-  color: #fff;
-}
-
-/* 4위 이상: 회색 계열 */
-.naver-rank-badge[data-rank="other"] {
-  background-color: #e9ecef;
-  color: #495057;
-}
-
-.naver-rank-badge[data-rank="1"],
-.naver-rank-badge[data-rank="2"],
-.naver-rank-badge[data-rank="3"] {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-/* 결과 항목 컨테이너에 flex 적용 */
-.naver-rank-item-wrap {
-  display: flex !important;
-  align-items: flex-start !important;
+  box-shadow: 0 2px 8px rgba(3, 199, 90, 0.45);
 }

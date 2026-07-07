@@ -8,13 +8,13 @@ const AD_CHILD_SELS = [
   'a.Mc9HIJyhZZ2sN6p9IMT0',
 ];
 
-// 통합 결과 아이템 선택자 (NaverCrawlingService: kin/web/review/ugcItem/fds-web-doc-root)
+// 통합 결과 아이템 선택자
+// data-meta-ssuid="web"은 fds-web-doc-root 여러 개를 감싸는 컨테이너 → 제외
 const RESULT_SEL = [
-  'div[data-template-id="ugcItem"]',
-  'div.fds-web-doc-root',
-  'div[data-meta-ssuid="kin"]',
-  'div[data-meta-ssuid="web"]',
-  'div[data-meta-ssuid="review"]',
+  'div[data-template-id="ugcItem"]',   // 블로그/카페
+  'div.fds-web-doc-root',               // 웹문서 (개별 항목)
+  'div[data-meta-ssuid="kin"]',         // 지식iN
+  'div[data-meta-ssuid="review"]',      // 리뷰
 ].join(', ');
 
 function isAd(el) {
@@ -27,11 +27,20 @@ function isAd(el) {
   return false;
 }
 
+function badgeBg(rank) {
+  if (rank === 1) return '#03c75a'; // 찐초록
+  if (rank === 2) return '#5abf88'; // 연한초록
+  if (rank === 3) return '#9ed4b0'; // 희미하게 초록
+  return '#b0b8c1';                 // 회색 (4위+)
+}
+
 function createBadge(rank) {
   const badge = document.createElement('span');
   badge.className = 'naver-rank-badge';
-  badge.dataset.rank = rank <= 3 ? String(rank) : 'other';
+  badge.dataset.rank = rank === 1 ? '1' : 'other';
   badge.textContent = rank;
+  badge.style.backgroundColor = badgeBg(rank);
+  badge.style.color = '#fff';
   return badge;
 }
 
