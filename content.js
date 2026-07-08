@@ -27,6 +27,16 @@ function isAd(el) {
   return false;
 }
 
+function isPopular(el) {
+  // NaverCrawlingService hasPopularity() 참고:
+  // div._fe_view_root._slog_visible > div.sds-comps-header 텍스트에 "인기글" 포함
+  // 또는 span.fds-comps-header-headline 텍스트에 "인기글" 포함
+  const root = el.closest('div._fe_view_root._slog_visible, div[data-meta-ssuid]');
+  if (!root) return false;
+  const header = root.querySelector('div.sds-comps-header.type-basic.fds-header, span.fds-comps-header-headline');
+  return !!(header && header.textContent.includes('인기글'));
+}
+
 function badgeBg(rank) {
   if (rank === 1) return '#03c75a'; // 찐초록
   if (rank === 2) return '#5abf88'; // 연한초록
@@ -55,7 +65,7 @@ function insertBadge(item, rank) {
 }
 
 function applyRanks() {
-  const allItems = [...document.querySelectorAll(RESULT_SEL)].filter(el => !isAd(el));
+  const allItems = [...document.querySelectorAll(RESULT_SEL)].filter(el => !isAd(el) && !isPopular(el));
 
   // 중첩 제거: 다른 결과 항목 안에 포함된 것은 제외 (최상위 항목만 유지)
   const topItems = allItems.filter(item =>
